@@ -117,6 +117,7 @@ int main()
         string str;
         cin>>str;
         string strn1 = str;
+        //to_string() to convert into string
         //cout<<strn<<endl;
         int flag=0;
         for (int j = 0; j < strn1.length(); ++j)
@@ -133,6 +134,7 @@ int main()
             }
             //cout<<(strn1[j]-48);
         } 
+        //convert string to int
         int x = atoi(strn1.c_str());
         //cout<<"\n"<<x<<endl;
 
