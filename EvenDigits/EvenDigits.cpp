@@ -85,7 +85,19 @@ string findDiff(string str1, string str2)
     return str; 
 } 
 
-
+string removeZero(string str) 
+{ 
+    // Count trailing zeros 
+    int i = 0; 
+    while (str[i] == '0') 
+       i++; 
+  
+    // The erase function removes i characters 
+    // from given index (0 here) 
+    str.erase(0, i); 
+  
+    return str; 
+} 
 
 
 
@@ -173,7 +185,7 @@ int main()
         } 
         int y = atoi(strn2.c_str());
         //cout<<"\n"<<y<<endl;
-        if(str.length()<6)
+        if(str.length()<9)
         {
 
         int n = atoi(str.c_str());
@@ -194,11 +206,11 @@ int main()
             //cout<<strc2<<endl;
             if(isSmaller(strc1,strc2))
             {
-                cout<<"Case #"<<i+1<<": "<<strc1<<endl;
+                cout<<"Case #"<<i+1<<": "<<removeZero(strc1)<<endl;
             }
             else
             {
-                cout<<"Case #"<<i+1<<": "<<strc2<<endl;
+                cout<<"Case #"<<i+1<<": "<<removeZero(strc2)<<endl;
             }
         }
         
