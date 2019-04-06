@@ -152,7 +152,7 @@ int main()
         }
         
         printPrime(n,ct,l);
-        //cout<<prime26[0]<<" "<<zpos<<endl;
+        cout<<prime26[0]<<" "<<zpos<<endl;
         pt[zpos]=prime26[0];
         leftfind(pt,ct,1,zpos,prime26[0]);
         /*for (int i = 0; i < l+1; ++i)
