@@ -5,6 +5,42 @@ int zpos;
 int prime26[26];
 
 
+void insertprime(int n)
+{
+	for (int i = 0; i < 26; ++i)
+	{
+		if(prime26[i] == 0)
+		{
+			prime26[i] = n;
+			break;
+		}
+		else if(prime26[i] == n)
+		{
+			break;
+		}
+	}
+}
+
+int leftfind(int *pt,int *ct,int i,int z,int zprime)
+{
+	for (int j = z; j >=i; --j)
+	{
+		pt[j-1] = ct[j]/pt[j];
+		//cout<<pt[j-1]<<endl;
+		insertprime(pt[j-1]);
+	}
+	return 0;
+}
+
+int rightfind(int *pt,int *ct,int i,int z,int zprime)
+{
+	for (int j = i; j <z; ++j)
+	{
+		pt[j] = ct[j]/pt[j-1];
+		//cout<<"we ewe :"<<pt[j]<<endl;
+	}
+}
+
 int checkPrime(int i,int *ct,int l)
 {
     for(size_t j = 1; j <= l; j++)
@@ -65,6 +101,7 @@ int main()
         cin>>n;
         cin>>l;
         int ct[l+1];
+        int pt[l+2]={0};
         for(size_t i = 1; i <= l; i++)
         {
             cin>>ct[i];
@@ -72,6 +109,15 @@ int main()
         
         printPrime(n,ct,l);
         cout<<prime26[0]<<" "<<zpos<<endl;
+        pt[zpos]=prime26[0];
+        leftfind(pt,ct,1,zpos,prime26[0]);
+        rightfind(pt,ct,zpos,l+1,prime26[0]);
+        //cout<<ct[zpos]/pt[zpos]<<endl;
+        for (int i = 0; i < l+1; ++i)
+        {
+        	cout<<"cipher :"<<pt[i]<<endl;
+        }
+
     }
     
 }
