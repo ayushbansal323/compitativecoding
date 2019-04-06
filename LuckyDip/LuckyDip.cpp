@@ -34,7 +34,7 @@ int binarySearch(double arr[], int l, int r, double x)
   
     // We reach here when element is not 
     // present in array 
-    return r; 
+    return -1; 
 } 
 
 int main()
