@@ -117,8 +117,16 @@ int main()
         {
             for(size_t j = 0; j < n; j++)
             {
-                int temp=(rand()%2)+48;
-                request[j]=temp;
+                if(i==0)
+                {
+                    int temp=(j%2)+48;
+                    request[j]=temp;
+                }
+                else
+                {
+                    int temp=(rand()%2)+48;
+                    request[j]=temp;
+                }
             }
             cout<<request<<endl;
             cout.flush();
