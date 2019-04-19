@@ -49,6 +49,7 @@ long long int maxFind(BitParty *bp,long long int Cashers,int type)
     }
     return max;
 }
+
 int check(long long int T,long long int Rob,long long int Bits,long long int Cashers,BitParty *bp)
 {
     long long int Capacity[Cashers];
@@ -60,8 +61,8 @@ int check(long long int T,long long int Rob,long long int Bits,long long int Cas
     }
     //qsort(<arrayname>,<size>,sizeof(<elementsize>),compare_function);
     qsort (Capacity, sizeof(Capacity)/sizeof(*Capacity), sizeof(*Capacity), compare_function);
-    int bcount=0;
-    int rcount=0;
+    long long int bcount=0;
+    long long int rcount=0;
     for (size_t i = 0; i < Cashers; i++)
     {
         bcount=bcount+Capacity[i];
@@ -83,6 +84,38 @@ int check(long long int T,long long int Rob,long long int Bits,long long int Cas
     //cout<<"\n"<<Bits<<"\t"<<Rob<<endl;
     return 0;
 }
+
+long long int findt(long long int start,long long int stop,long long int Rob,long long int Bits,long long int Cashers,BitParty *bp)
+{
+        if (stop >= start) { 
+        long long int mid = start + ((stop - start) / 2); 
+  
+        // If the element is present at the middle 
+        // itself 
+        if (check( mid, Rob, Bits, Cashers, bp) == false)
+        { 
+            if(check( mid+1, Rob, Bits, Cashers, bp) == true)
+            {
+                return mid+1;
+            }
+            return findt(mid+1,stop, Rob, Bits, Cashers, bp);
+        } 
+        // Else the element can only be present 
+        // in right subarray
+        
+        return findt(start,mid-1, Rob, Bits, Cashers, bp); 
+    } 
+  
+    // We reach here when element is not 
+    // present in array
+    /*if(check( stop+1, Rob, Bits, Cashers, bp) == true)
+    {
+                return stop+1;
+    } */
+    return stop; 
+}
+
+
 int main(int argc, char const *argv[])
 {
     long long int t;
@@ -101,8 +134,10 @@ int main(int argc, char const *argv[])
         long long int maxST=maxFind(bp,Cashers,1);
         long long int maxPT=maxFind(bp,Cashers,2);
         long long int maxT=(maxST*Bits)+maxPT;
-        cout<<check( 7, Rob, Bits, Cashers, bp);
-        cout<<"\t"<<maxST<<"\t"<<maxPT<<"\t"<<maxT<<endl;
+        long long int ans=0;
+        ans=findt(0,maxT, Rob, Bits, Cashers, bp);
+        //cout<<check( 7, Rob, Bits, Cashers, bp);
+        cout<<"Case #"<<z+1<<": "<<ans<<endl;
     }
     
     return 0;
