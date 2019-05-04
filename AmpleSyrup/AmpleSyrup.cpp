@@ -27,7 +27,9 @@ double findmax(int t,double *r,double * h,double *mrad,double *mssa)
 }
 double findmaxarea(int t,int k,double *r,double * h,int n,double *mrad,double *mssa)
 {
-    if(k==1)
+    std::cerr << std::fixed<<std::setprecision(20);
+
+    if(k==1 )
     {
         return findmax(t,r,h,mrad,mssa);
     }
@@ -38,11 +40,13 @@ double findmaxarea(int t,int k,double *r,double * h,int n,double *mrad,double *m
         *mssa=(*mssa)+(2*M_PI*r[t]*h[t]);
         if(*mrad>r[t])
         {
-
+            //cerr<<"a\n";
             return (M_PI*(*mrad)*(*mrad))+(*mssa);
         }
         else
         {
+            //cerr<<"b\n";
+            *mrad=r[t];
             return (M_PI*r[t]*r[t])+(*mssa);
         }
         
@@ -51,26 +55,33 @@ double findmaxarea(int t,int k,double *r,double * h,int n,double *mrad,double *m
     {
         double ans1;
         *mssa=0;
+        *mrad=0;
+        double temp;
         findmaxarea(t-1,k-1,r,h,n,mrad,mssa);
         *mssa=(*mssa)+(2*M_PI*r[t]*h[t]);
         if(*mrad>r[t])
         {
-
+            temp=(*mrad);
             ans1=(M_PI*(*mrad)*(*mrad))+(*mssa);
         }
         else
         {
+            temp=(r[t]);
             ans1=(M_PI*r[t]*r[t])+(*mssa);
         }
         *mssa=0;
+        *mrad=0;
         double ans2=findmaxarea(t-1,k,r,h,n,mrad,mssa);
-
-        if(ans1>ans2)
+        //cerr<<"ans1 :"<<ans1<<" ans2:"<<ans2<<endl;
+        if((double)ans1>=(double)ans2)
         {
+            *mrad=temp;
+            //cerr<<"a"<<endl;
             return ans1;
         }
         else
         {
+            //cerr<<"b"<<endl;
             return ans2;
         }
         
@@ -80,7 +91,7 @@ double findmaxarea(int t,int k,double *r,double * h,int n,double *mrad,double *m
 }
 int main()
 {
-    std::cout << std::fixed<<std::setprecision(9);
+    std::cout << std::fixed<<std::setprecision(20);
     int t;
     cin>>t;
     for (size_t z = 0; z < t; z++)
